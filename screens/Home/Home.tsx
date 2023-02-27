@@ -1,12 +1,14 @@
+import { useState } from 'react';
 import { Text, View, StatusBar, TextInput } from 'react-native';
-
 import { useFonts, Inter_700Bold } from '@expo-google-fonts/inter';
 
+import { ConvertDollarToCents } from '../../src/ConvertDollarToCents';
+import { ConvertCentsToCoins } from '../../src/ConvertCentsToCoins/ConvertCentsToCoins';
+
 import { styles } from './styles';
-import { useState } from 'react';
 
 export function Home() {
-  const [dollarValue, setDollarValue] = useState(0);
+  const [centsValue, setCentsValue] = useState(0);
   const [error, setError] = useState(false);
 
   const [fontsLoaded] = useFonts({
@@ -16,16 +18,17 @@ export function Home() {
   if (!fontsLoaded) return null;
 
   const handleOnTextChange = (text: string) => {
-    const valueInNumber = Number(text);
+    const dollarsInNumber = Number(text);
 
-    if (Number.isNaN(valueInNumber)) {
+    if (Number.isNaN(dollarsInNumber)) {
       setError(true);
     } else {
-      setDollarValue(valueInNumber);
+      setCentsValue(ConvertDollarToCents(dollarsInNumber));
       setError(false);
     }
   };
 
+  const coins = ConvertCentsToCoins(centsValue);
   return (
     <View style={styles.container}>
       <Text style={styles.title}>Dollars to Cents</Text>
