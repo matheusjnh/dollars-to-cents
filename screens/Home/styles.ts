@@ -10,10 +10,16 @@ const theme = {
 export const styles = StyleSheet.create({
   container: {
     flex: 1,
-    paddingTop: 60,
+    paddingVertical: 60,
     paddingHorizontal: 40,
     backgroundColor: '#E8E9C7',
+    justifyContent: 'space-between',
     alignItems: 'center',
+  },
+
+  header: {
+    alignItems: 'center',
+    alignSelf: 'stretch',
   },
 
   title: {
@@ -23,8 +29,9 @@ export const styles = StyleSheet.create({
     fontFamily: 'inter_bold',
   },
 
-  inputArea: {
+  inputContainer: {
     flexDirection: 'row',
+    justifyContent: 'center',
     alignItems: 'center',
     fontSize: inputAreaFontSize,
   },
@@ -35,7 +42,8 @@ export const styles = StyleSheet.create({
     fontSize: inputAreaFontSize,
   },
 
-  input: {
+  dollarInput: {
+    flexShrink: 1,
     fontSize: inputAreaFontSize,
     borderBottomColor: theme.textSecondary,
     borderBottomWidth: 2,
@@ -43,5 +51,39 @@ export const styles = StyleSheet.create({
 
   inputError: {
     borderBottomColor: '#F52447',
+  },
+
+  centsResult: {
+    flexDirection: 'row',
+    alignItems: 'center',
+  },
+
+  centsValue: {
+    flexShrink: 1,
+    fontSize: inputAreaFontSize * 1.5,
+  },
+
+  centsSymbol: {
+    paddingLeft: 10,
+    color: theme.textSecondary,
+    fontSize: inputAreaFontSize * 1.5,
+  },
+
+  coinsDivision: {
+    width: '100%',
+    flexDirection: 'row',
+    justifyContent: 'space-evenly',
+  },
+
+  coinsValue: {
+    alignItems: 'flex-end',
+  },
+
+  coinsCount: {
+    alignItems: 'flex-end',
+  },
+
+  coinsText: {
+    fontSize: 18,
   },
 });

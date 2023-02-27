@@ -11,12 +11,6 @@ export function Home() {
   const [centsValue, setCentsValue] = useState(0);
   const [error, setError] = useState(false);
 
-  const [fontsLoaded] = useFonts({
-    inter_bold: Inter_700Bold,
-  });
-
-  if (!fontsLoaded) return null;
-
   const handleOnTextChange = (text: string) => {
     const dollarsInNumber = Number(text);
 
@@ -29,23 +23,64 @@ export function Home() {
   };
 
   const coins = ConvertCentsToCoins(centsValue);
+
+  const [fontsLoaded] = useFonts({
+    inter_bold: Inter_700Bold,
+  });
+  if (!fontsLoaded) return null;
+
   return (
     <View style={styles.container}>
-      <Text style={styles.title}>Dollars to Cents</Text>
       <StatusBar
         barStyle="dark-content"
         backgroundColor="transparent"
         translucent
       />
 
-      <View style={styles.inputArea}>
-        <Text style={styles.dollarSymbol}>$</Text>
+      <View style={styles.header}>
+        <Text style={styles.title}>Dollars to Cents</Text>
 
-        <TextInput
-          style={[styles.input, error && styles.inputError]}
-          onChangeText={handleOnTextChange}
-          keyboardType="decimal-pad"
-        ></TextInput>
+        <View style={styles.inputContainer}>
+          <Text style={styles.dollarSymbol}>$</Text>
+
+          <TextInput
+            style={[styles.dollarInput, error && styles.inputError]}
+            onChangeText={handleOnTextChange}
+            keyboardType="decimal-pad"
+          />
+        </View>
+      </View>
+
+      <View style={styles.centsResult}>
+        <Text style={styles.centsValue}>{centsValue}</Text>
+
+        <Text style={styles.centsSymbol}>¢</Text>
+      </View>
+
+      <View style={styles.coinsDivision}>
+        <View style={styles.coinsValue}>
+          {coins.map((coin, index) => (
+            <Text style={styles.coinsText} key={index}>
+              {coin.value} ¢
+            </Text>
+          ))}
+        </View>
+
+        <View>
+          {coins.map((coin, index) => (
+            <Text style={styles.coinsText} key={index}>
+              {coin.name}
+            </Text>
+          ))}
+        </View>
+
+        <View style={styles.coinsCount}>
+          {coins.map((coin, index) => (
+            <Text style={styles.coinsText} key={index}>
+              {coin.count}x
+            </Text>
+          ))}
+        </View>
       </View>
     </View>
   );
